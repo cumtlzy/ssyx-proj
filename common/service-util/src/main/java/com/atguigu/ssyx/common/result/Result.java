@@ -21,7 +21,7 @@ public class Result<T> {
     private T data;
 
     //设置数据,返回对象的方法
-    public static<T> Result<T> build(T data,ResultCodeEnum resultCodeEnum) {
+    public static<T> Result<T> build(T data, ResultCodeEnum resultCodeEnum) {
         //创建Result对象，设置值，返回对象
         Result<T> result = new Result<>();
         //判断返回结果中是否需要数据
