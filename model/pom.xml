@@ -37,10 +37,16 @@
             <scope>provided </scope>
         </dependency>
 
-        <dependency>
+ <!--       <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <scope>provided </scope>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.49</version>
         </dependency>
 
         <!--创建索引库的-->
