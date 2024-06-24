@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ClassName: AdminController
@@ -30,8 +31,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private RoleService roleService;
+
     @ApiOperation(value = "获取管理用户分页列表")
-    @PostMapping("{page}/{limit}")
+    @GetMapping("{page}/{limit}")
     public Result index(@PathVariable Long page,
                         @PathVariable Long limit,
                         AdminQueryVo userQueryVo) {
@@ -74,6 +78,20 @@ public class AdminController {
     @DeleteMapping("batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {
         adminService.removeByIds(idList);
+        return Result.ok(null);
+    }
+
+    @ApiOperation(value = "根据用户获取角色数据")
+    @GetMapping("/toAssign/{adminId}")
+    public Result toAssign(@PathVariable Long adminId) {
+        Map<String, Object> roleMap = roleService.findRoleByUserId(adminId);
+        return Result.ok(roleMap);
+    }
+
+    @ApiOperation(value = "根据用户分配角色")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestParam Long adminId, @RequestParam Long[] roleId) {
+        roleService.saveUserRoleRealtionShip(adminId,roleId);
         return Result.ok(null);
     }
 }
