@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ClassName: PermissionController
@@ -49,6 +50,20 @@ public class PermissionController {
     @DeleteMapping("remove/{id}")
     public Result remove(@PathVariable Long id) {
         permissionService.removeChildById(id);
+        return Result.ok(null);
+    }
+
+    @ApiOperation(value = "根据角色获取菜单数据")
+    @GetMapping("/toAssign/{roleId}")
+    public Result toAssign(@PathVariable Long roleId) {
+        Map<String, Object> roleMap = permissionService.findPermissionByRoleId(roleId);
+        return Result.ok(roleMap);
+    }
+
+    @ApiOperation(value = "根据用户分配角色")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestParam Long roleId,@RequestParam Long[] permissionId) {
+        permissionService.saveRolePermissionRealtionShip(roleId,permissionId);
         return Result.ok(null);
     }
 }
