@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 @Api(tags = "RegionWare管理")
 @RestController
 @RequestMapping("admin/sys/regionWare")
+@CrossOrigin
 public class RegionWareController {
 
     @Resource
