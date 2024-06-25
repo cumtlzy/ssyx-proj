@@ -15,4 +15,7 @@ public interface RegionWareService extends IService<RegionWare> {
     //开通区域列表
     IPage<RegionWare> selectPage(Page<RegionWare> pageParam,
                                  RegionWareQueryVo regionWareQueryVo);
+
+    //添加开通区域
+    void saveRegionWare(RegionWare regionWare);
 }

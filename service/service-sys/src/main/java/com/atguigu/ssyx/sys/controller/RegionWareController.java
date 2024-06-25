@@ -9,10 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -41,5 +38,13 @@ public class RegionWareController {
         IPage<RegionWare> pageModel = regionWareService.selectPage(pageParam, regionWareQueryVo);
 
         return Result.ok(pageModel);
+    }
+
+    //添加开通区域
+    @ApiOperation(value = "新增")
+    @PostMapping("save")
+    public Result save(@RequestBody RegionWare regionWare) {
+        regionWareService.saveRegionWare(regionWare);
+        return Result.ok(null);
     }
 }
