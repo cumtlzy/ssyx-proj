@@ -1,6 +1,6 @@
 package com.atguigu.ssyx.product.mapper;
 
-import com.atguigu.ssyx.product.entity.SkuInfo;
+import com.atguigu.ssyx.model.product.SkuInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

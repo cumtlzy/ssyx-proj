@@ -1,6 +1,6 @@
 package com.atguigu.ssyx.product.service;
 
-import com.atguigu.ssyx.product.entity.SkuAttrValue;
+import com.atguigu.ssyx.model.product.SkuAttrValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

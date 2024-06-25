@@ -1,5 +1,6 @@
 package com.atguigu.ssyx.product.service;
 
+import com.atguigu.ssyx.model.product.AttrGroup;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author atguigu
  * @since 2024-06-25
  */
-public interface AttrGroupService<AttrGroup> extends IService<AttrGroup> {
+public interface AttrGroupService extends IService<AttrGroup> {
 
 }
