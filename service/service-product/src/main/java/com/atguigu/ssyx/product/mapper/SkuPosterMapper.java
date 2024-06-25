@@ -1,0 +1,16 @@
+package com.atguigu.ssyx.product.mapper;
+
+import com.atguigu.ssyx.product.entity.SkuPoster;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * <p>
+ * 商品海报表 Mapper 接口
+ * </p>
+ *
+ * @author atguigu
+ * @since 2024-06-25
+ */
+public interface SkuPosterMapper extends BaseMapper<SkuPoster> {
+
+}
