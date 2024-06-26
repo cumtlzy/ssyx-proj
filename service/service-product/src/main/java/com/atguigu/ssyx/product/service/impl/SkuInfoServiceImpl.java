@@ -13,6 +13,7 @@ import com.atguigu.ssyx.product.service.SkuPosterService;
 import com.atguigu.ssyx.vo.product.SkuInfoQueryVo;
 import com.atguigu.ssyx.vo.product.SkuInfoVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -45,6 +46,9 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
 
     @Autowired
     private SkuAttrValueService skuAttrValueService;
+
+    @Autowired
+    private SkuInfoMapper  skuInfoMapper;
 
     //获取sku分页列表
     @Override
@@ -110,6 +114,26 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
             }
             skuAttrValueService.saveBatch(skuAttrValueList);
         }
+    }
 
+    //获取商品
+    @Override
+    public SkuInfoVo getSkuInfoVo(Long skuId) {
+        return getSkuInfoDB(skuId);
+    }
+
+    private SkuInfoVo getSkuInfoDB(Long skuId) {
+        SkuInfoVo skuInfoVo = new SkuInfoVo();
+
+        SkuInfo skuInfo = skuInfoMapper.selectById(skuId);
+        List<SkuImage> skuImageList = skuImagesService.findBySkuId(skuId);
+        List<SkuPoster> skuPosterList = skuPosterService.findBySkuId(skuId);
+        List<SkuAttrValue> skuAttrValueList = skuAttrValueService.findBySkuId(skuId);
+
+        BeanUtils.copyProperties(skuInfo, skuInfoVo);
+        skuInfoVo.setSkuImagesList(skuImageList);
+        skuInfoVo.setSkuPosterList(skuPosterList);
+        skuInfoVo.setSkuAttrValueList(skuAttrValueList);
+        return skuInfoVo;
     }
 }

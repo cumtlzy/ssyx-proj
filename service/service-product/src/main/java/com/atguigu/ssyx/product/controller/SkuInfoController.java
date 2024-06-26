@@ -55,5 +55,12 @@ public class SkuInfoController {
         skuInfoService.saveSkuInfo(skuInfoVo);
         return Result.ok(null);
     }
+
+    @ApiOperation(value = "获取")
+    @GetMapping("get/{id}")
+    public Result<SkuInfoVo> get(@PathVariable Long id) {
+        SkuInfoVo skuInfoVo = skuInfoService.getSkuInfoVo(id);
+        return Result.ok(skuInfoVo);
+    }
 }
 

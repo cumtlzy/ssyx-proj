@@ -22,4 +22,7 @@ public interface SkuInfoService extends IService<SkuInfo> {
 
     //添加商品
     void saveSkuInfo(SkuInfoVo skuInfoVo);
+
+    //获取商品
+    SkuInfoVo getSkuInfoVo(Long id);
 }
