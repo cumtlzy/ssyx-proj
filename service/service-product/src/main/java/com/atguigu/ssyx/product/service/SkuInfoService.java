@@ -25,4 +25,7 @@ public interface SkuInfoService extends IService<SkuInfo> {
 
     //获取商品
     SkuInfoVo getSkuInfoVo(Long id);
+
+    //修改商品
+    void updateSkuInfo(SkuInfoVo skuInfoVo);
 }

@@ -14,6 +14,8 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  * sku信息 前端控制器
@@ -61,6 +63,27 @@ public class SkuInfoController {
     public Result<SkuInfoVo> get(@PathVariable Long id) {
         SkuInfoVo skuInfoVo = skuInfoService.getSkuInfoVo(id);
         return Result.ok(skuInfoVo);
+    }
+
+    @ApiOperation(value = "修改")
+    @PutMapping("update")
+    public Result updateById(@RequestBody SkuInfoVo skuInfoVo) {
+        skuInfoService.updateSkuInfo(skuInfoVo);
+        return Result.ok(null);
+    }
+
+    @ApiOperation(value = "删除")
+    @DeleteMapping("remove/{id}")
+    public Result remove(@PathVariable Long id) {
+        skuInfoService.removeById(id);
+        return Result.ok(null);
+    }
+
+    @ApiOperation(value = "根据id列表删除")
+    @DeleteMapping("batchRemove")
+    public Result batchRemove(@RequestBody List<Long> idList) {
+        skuInfoService.removeByIds(idList);
+        return Result.ok(null);
     }
 }
 

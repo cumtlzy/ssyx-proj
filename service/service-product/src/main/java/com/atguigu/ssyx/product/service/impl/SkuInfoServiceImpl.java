@@ -136,4 +136,53 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         skuInfoVo.setSkuAttrValueList(skuAttrValueList);
         return skuInfoVo;
     }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void updateSkuInfo(SkuInfoVo skuInfoVo) {
+        Long id = skuInfoVo.getId();
+        //更新sku信息
+        this.updateById(skuInfoVo);
+
+        //删除sku海报
+        skuPosterService.remove(new LambdaQueryWrapper<SkuPoster>().eq(SkuPoster::getSkuId, id));
+        //保存sku海报
+        List<SkuPoster> skuPosterList = skuInfoVo.getSkuPosterList();
+        if(!CollectionUtils.isEmpty(skuPosterList)) {
+            int sort = 1;
+            for(SkuPoster skuPoster : skuPosterList) {
+                skuPoster.setSkuId(id);
+                sort++;
+            }
+            skuPosterService.saveBatch(skuPosterList);
+        }
+
+        //删除sku图片
+        skuImagesService.remove(new LambdaQueryWrapper<SkuImage>().eq(SkuImage::getSkuId, id));
+        //保存sku图片
+        List<SkuImage> skuImagesList = skuInfoVo.getSkuImagesList();
+        if(!CollectionUtils.isEmpty(skuImagesList)) {
+            int sort = 1;
+            for(SkuImage skuImages : skuImagesList) {
+                skuImages.setSkuId(id);
+                skuImages.setSort(sort);
+                sort++;
+            }
+            skuImagesService.saveBatch(skuImagesList);
+        }
+
+        //删除sku平台属性
+        skuAttrValueService.remove(new LambdaQueryWrapper<SkuAttrValue>().eq(SkuAttrValue::getSkuId, id));
+        //保存sku平台属性
+        List<SkuAttrValue> skuAttrValueList = skuInfoVo.getSkuAttrValueList();
+        if(!CollectionUtils.isEmpty(skuAttrValueList)) {
+            int sort = 1;
+            for(SkuAttrValue skuAttrValue : skuAttrValueList) {
+                skuAttrValue.setSkuId(id);
+                skuAttrValue.setSort(sort);
+                sort++;
+            }
+            skuAttrValueService.saveBatch(skuAttrValueList);
+        }
+    }
 }
