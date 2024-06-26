@@ -1,6 +1,10 @@
 package com.atguigu.ssyx.product.service;
 
 import com.atguigu.ssyx.model.product.SkuInfo;
+import com.atguigu.ssyx.vo.product.SkuInfoQueryVo;
+import com.atguigu.ssyx.vo.product.SkuInfoVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +17,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SkuInfoService extends IService<SkuInfo> {
 
+    //获取sku分页列表
+    IPage<SkuInfo> selectPage(Page<SkuInfo> pageParam, SkuInfoQueryVo skuInfoQueryVo);
+
+    //添加商品
+    void saveSkuInfo(SkuInfoVo skuInfoVo);
 }
