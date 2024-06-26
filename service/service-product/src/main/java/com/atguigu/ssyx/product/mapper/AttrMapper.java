@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author atguigu
  * @since 2024-06-25
  */
+
 public interface AttrMapper extends BaseMapper<Attr> {
 
 }
