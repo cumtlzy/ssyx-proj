@@ -28,4 +28,13 @@ public interface SkuInfoService extends IService<SkuInfo> {
 
     //修改商品
     void updateSkuInfo(SkuInfoVo skuInfoVo);
+
+    //商品审核
+    void check(Long skuId, Integer status);
+
+    //商品上架
+    void publish(Long skuId, Integer status);
+
+    //新人专享
+    void isNewPerson(Long skuId, Integer status);
 }

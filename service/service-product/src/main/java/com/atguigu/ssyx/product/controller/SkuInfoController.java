@@ -85,5 +85,36 @@ public class SkuInfoController {
         skuInfoService.removeByIds(idList);
         return Result.ok(null);
     }
+
+    /**
+     * 商品审核
+     * @param skuId
+     * @return
+     */
+    @GetMapping("check/{skuId}/{status}")
+    public Result check(@PathVariable("skuId") Long skuId, @PathVariable("status") Integer status) {
+        skuInfoService.check(skuId, status);
+        return Result.ok(null);
+    }
+
+    /**
+     * 商品上架
+     * @param skuId
+     * @return
+     */
+    @GetMapping("publish/{skuId}/{status}")
+    public Result publish(@PathVariable("skuId") Long skuId,
+                          @PathVariable("status") Integer status) {
+        skuInfoService.publish(skuId, status);
+        return Result.ok(null);
+    }
+
+    //新人专享
+    @GetMapping("isNewPerson/{skuId}/{status}")
+    public Result isNewPerson(@PathVariable("skuId") Long skuId,
+                              @PathVariable("status") Integer status) {
+        skuInfoService.isNewPerson(skuId, status);
+        return Result.ok(null);
+    }
 }
 
